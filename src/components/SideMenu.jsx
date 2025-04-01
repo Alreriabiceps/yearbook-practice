@@ -7,6 +7,10 @@ const SideMenu = () => {
     const handleStudentList = () => {
         navigate('/studentlist')
     }
+
+    const handleAddNewStudent = () => {
+      navigate('/addstudent')
+    }
   return (
     <>
       <div className="flex h-screen flex-col justify-between border-e border-gray-100 bg-white">
@@ -53,6 +57,15 @@ const SideMenu = () => {
                       className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                     >
                       Student List
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a
+                      onClick={handleAddNewStudent}
+                      className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                    >
+                      Add New Student
                     </a>
                   </li>
 
