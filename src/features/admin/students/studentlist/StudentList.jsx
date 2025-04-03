@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ProfileCard from '../../../components/ProfileCard';
+import ProfileCard from '../../../../components/ProfileCard';
 import { useNavigate } from 'react-router';
 
 const StudentList = () => {

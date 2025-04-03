@@ -2,7 +2,9 @@ import React from 'react'
 
 const ViewStudent = () => {
   return (
-    <div>ViewStudent</div>
+    <div>
+      
+    </div>
   )
 }
 
