@@ -1,200 +1,133 @@
-import React from 'react'
-import { useNavigate } from 'react-router'
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router';
 
 const UserSideMenu = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [activeSection, setActiveSection] = useState('');
 
-const handleLandingPage = () => {
-    navigate('/landingpage')
-}
+  // Navigation handlers
+  const handleLandingPage = () => navigate('/landingpage');
+  const handleYearBook = () => navigate('/yearbook');
+  const handleInformationSystem = () => navigate('/information-system');
+  const handleMarineEngineering = () => navigate('/marine-engineering');
+  const handleCriminology = () => navigate('/criminology');
+  const handleTourismManagement = () => navigate('/tourism-management');
 
-const handleClassGallery = () => {
-    navigate('/class-gallery')
-}
-
-const handleInformationSystem = () => {
-    navigate('/information-system')
-}
-
-const handleMarineEngineering = () => {
-    navigate('/marine-engineering')
-}
-
-const handleCriminology = () => {
-    navigate('/criminology')
-}
-
-const handleTourismManagement = () => {
-    navigate('/tourism-management')
-}
+  // Update active section based on current route
+  useEffect(() => {
+    const pathToSection = {
+      '/landingpage': 'landingpage',
+      '/yearbook': 'yearbook',
+      '/information-system': 'information-system',
+      '/marine-engineering': 'marine-engineering',
+      '/criminology': 'criminology',
+      '/tourism-management': 'tourism-management'
+    };
+    
+    setActiveSection(pathToSection[location.pathname] || '');
+  }, [location.pathname]);
 
   return (
-    <div>
-        <div className="flex h-screen flex-col justify-between border-e border-gray-100 bg-white">
-  <div className="px-4 py-6">
-    <span className="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
-      Logo
-    </span>
+    <div className="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-100 flex flex-col z-50">
+      <div className="px-4 py-6 flex-1 overflow-y-auto">
+        <span className="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
+          Logo
+        </span>
 
-    <ul className="mt-6 space-y-1">
-      <li>
-        <a
-        onClick={handleLandingPage}
-          
-          className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-        >
-          General
-        </a>
-      </li>
+        <ul className="mt-6 space-y-1">
+          <li>
+            <button
+              onClick={handleLandingPage}
+              className={`w-full text-left block rounded-lg px-4 py-2 text-sm font-medium ${
+                activeSection === 'landingpage' ? 'bg-gray-200 text-gray-900' : 'bg-gray-100 text-gray-700'
+              } hover:bg-gray-200 transition-colors`}
+            >
+              General
+            </button>
+          </li>
 
-      <li>
-        <details className="group [&_summary::-webkit-details-marker]:hidden">
-          <summary
-            className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <span
-            onClick={handleClassGallery}
-            className="text-sm font-medium"> Yearbook </span>
+          <li>
+            <details className="group [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors">
+                <button
+                onClick={handleYearBook}
+                className="text-sm font-medium">Yearbook</button>
+                <span className="shrink-0 transition duration-300 group-open:-rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="size-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </summary>
 
-            <span className="shrink-0 transition duration-300 group-open:-rotate-180">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </summary>
-
-          <ul className="mt-2 space-y-1 px-4">
-            <li>
-              <a
-                onClick={handleInformationSystem}
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                BACHELOR OF INFORMATION SYSTEM
-              </a>
-            </li>
-
-            <li>
-              <a
-                onClick={handleTourismManagement}
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                BACHELOR OF TOURISM MANAGEMENT
-              </a>
-            </li>
-            <li>
-              <a
-                onClick={handleCriminology}
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                BACHELOR OF CRIMINOLOGY
-              </a>
-            </li>
-            <li>
-              <a
-                onClick={handleMarineEngineering}
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                BACHELOR OF MARINE ENGINEERING
-              </a>
-            </li>
-          </ul>
-        </details>
-      </li>
-
-      <li>
-        <a
-          
-          className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-        >
-          Teacher Messages
-        </a>
-      </li>
-
-      <li>
-        <details className="group [&_summary::-webkit-details-marker]:hidden">
-          <summary
-            className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <span className="text-sm font-medium"> Account </span>
-
-            <span className="shrink-0 transition duration-300 group-open:-rotate-180">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-          </summary>
-
-          <ul className="mt-2 space-y-1 px-4">
-            <li>
-              <a
-                
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Details
-              </a>
-            </li>
-
-            <li>
-              <a
-                
-                className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Security
-              </a>
-            </li>
-
-            <li>
-              <a
-                
-                className="w-full rounded-lg px-4 py-2 [text-align:_inherit] text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              >
-                Logout
-              </a>
-            </li>
-          </ul>
-        </details>
-      </li>
-    </ul>
-  </div>
-
-  <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
-    <a  className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
-      <img
-        alt=""
-        src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        className="size-10 rounded-full object-cover"
-      />
-
-      <div>
-        <p className="text-xs">
-          <strong className="block font-medium">Eric Frusciante</strong>
-
-          <span> eric@frusciante.com </span>
-        </p>
+              <ul className="mt-2 space-y-1 px-4">
+                <li>
+                  <button
+                    onClick={handleInformationSystem}
+                    className={`w-full text-left block rounded-lg px-4 py-2 text-sm font-medium ${
+                      activeSection === 'information-system' ? 'bg-gray-200 text-gray-900' : 'text-gray-500'
+                    } hover:bg-gray-100 hover:text-gray-700 transition-colors`}
+                  >
+                    BACHELOR OF INFORMATION SYSTEM
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleTourismManagement}
+                    className={`w-full text-left block rounded-lg px-4 py-2 text-sm font-medium ${
+                      activeSection === 'tourism-management' ? 'bg-gray-200 text-gray-900' : 'text-gray-500'
+                    } hover:bg-gray-100 hover:text-gray-700 transition-colors`}
+                  >
+                    BACHELOR OF TOURISM MANAGEMENT
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleCriminology}
+                    className={`w-full text-left block rounded-lg px-4 py-2 text-sm font-medium ${
+                      activeSection === 'criminology' ? 'bg-gray-200 text-gray-900' : 'text-gray-500'
+                    } hover:bg-gray-100 hover:text-gray-700 transition-colors`}
+                  >
+                    BACHELOR OF CRIMINOLOGY
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleMarineEngineering}
+                    className={`w-full text-left block rounded-lg px-4 py-2 text-sm font-medium ${
+                      activeSection === 'marine-engineering' ? 'bg-gray-200 text-gray-900' : 'text-gray-500'
+                    } hover:bg-gray-100 hover:text-gray-700 transition-colors`}
+                  >
+                    BACHELOR OF MARINE ENGINEERING
+                  </button>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
       </div>
-    </a>
-  </div>
-</div>
-    </div>
-  )
-}
 
-export default UserSideMenu
+      <div className="border-t border-gray-100 p-4">
+        <div className="flex items-center gap-2">
+          <img
+            alt="User"
+            src="/profile.jpg"
+            className="size-10 rounded-full object-cover"
+          />
+          <div>
+            <p className="text-xs">
+              <strong className="block font-medium">Russelle Roxas</strong>
+              <span>russelleroxas11@gmail.com</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UserSideMenu;

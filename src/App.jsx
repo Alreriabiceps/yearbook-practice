@@ -1,44 +1,53 @@
+// App.jsx
 import React from 'react';
-import { Routes, Route } from 'react-router';
-import DefaultLayout from './layouts/DefaultLayout';
-import Hero from './pages/Hero';
+import { BrowserRouter, Routes, Route } from 'react-router';
+
 import Login from './login/Login';
+import Hero from './pages/Hero';
+import DefaultLayout from './layouts/DefaultLayout';
+import StudentLayout from './layouts/StudentLayout';
+
 import Dashboard from './features/admin/general/Dashboard';
 import StudentList from './features/admin/students/studentlist/StudentList';
-import AddStudent from './features/admin/students/studentlist/AddStudent.jsx';
-import ViewStudent from './features/admin/students/studentlist/ViewStudent.jsx';
-import EditStudent from './features/admin/students/studentlist/EditStudent.jsx';
-import LandingPage from './features/users/Dashboard/LandingPage.jsx';
-import ClassGallery from './features/users/Yearbook/ClassGallery.jsx';
-import StudentLayout from './layouts/StudentLayout.jsx';
-import InformationSystem from './features/users/Yearbook/pages/InformationSystem.jsx';
-import Criminology from './features/users/Yearbook/pages/Criminology.jsx';
+import AddStudent from './features/admin/students/studentlist/AddStudent';
+import ViewStudent from './features/admin/students/studentlist/ViewStudent';
+import EditStudent from './features/admin/students/studentlist/EditStudent';
+
+import LandingPage from './features/users/Dashboard/LandingPage';
+import Yearbook from './features/users/Yearbook/pages/Yearbook';
+import Criminology from './features/users/Yearbook/pages/Criminology';
+import InformationSystem from './features/users/Yearbook/pages/InformationSystem';
 import MarineEngineering from './features/users/Yearbook/pages/MarineEngineering';
-import TourismManagement from './features/users/Yearbook/pages/TourismManagement.jsx';
+import TourismManagement from './features/users/Yearbook/pages/TourismManagement';
 
 function App() {
   return (
-    <div>
+ 
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Login />} />
-        <Route path="hero" element={<Hero />} />
+        <Route path="/hero" element={<Hero />} />
+
+        {/* Admin Routes */}
         <Route element={<DefaultLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="studentList" element={<StudentList />} />
-          <Route path="viewstudent" element={<ViewStudent />} />
           <Route path="addstudent" element={<AddStudent />} />
-          <Route path="students/edit/:studentId" element={<EditStudent />} /> {/* Fixed route */}
+          <Route path="viewstudent" element={<ViewStudent />} />
+          <Route path="students/edit/:studentId" element={<EditStudent />} />
         </Route>
-        <Route element={<StudentLayout />} >
-        <Route path="landingpage" element={<LandingPage />} />
-        <Route path="class-gallery" element={<ClassGallery />} />
-        <Route path="information-system" element={<InformationSystem />} />
-        <Route path="criminology" element={<Criminology />} />
-        <Route path="marine-engineering" element={<MarineEngineering />} />
-        <Route path="tourism-management" element={<TourismManagement />} />
+
+        {/* Student Routes */}
+        <Route element={<StudentLayout />}>
+          <Route path="landingpage" element={<LandingPage />} />
+          <Route path="yearbook" element={<Yearbook />} />
+          <Route path="criminology" element={<Criminology />} />
+          <Route path="information-system" element={<InformationSystem />} />
+          <Route path="tourism-management" element={<TourismManagement />} />
+          <Route path="marine-engineering" element={<MarineEngineering />} />
         </Route>
       </Routes>
-    </div>
+  
   );
 }
 

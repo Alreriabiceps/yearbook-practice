@@ -15,8 +15,8 @@ const SideMenu = () => {
     <>
       <div className="flex h-screen flex-col justify-between border-e border-gray-100 bg-white">
         <div className="px-4 py-6">
-          <span className="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
-            ECA YEAR BOOK
+          <span className="grid h-10 w-32 place-content-center ml-6 rounded-lg text-xs text-gray-600">
+           <strong>ADMIN DASHBOARD</strong>
           </span>
 
           <ul className="mt-6 space-y-1">
