@@ -1,18 +1,15 @@
 import React from 'react'
-import UserSideMenu from '../features/users/components/UserSideMenu'
+import NavBar from '../features/users/components/NavBar'
 import { Outlet } from 'react-router'
 
 const StudentLayout = () => {
   return (
-    <div className="flex">
-    {/* SideMenu */}
-    <UserSideMenu />
+   <>
+       <NavBar />
+ 
 
-    {/* Main content */}
-    <div className="flex-1">
       <Outlet />
-    </div>
-  </div>
+      </>
   )
 }
 

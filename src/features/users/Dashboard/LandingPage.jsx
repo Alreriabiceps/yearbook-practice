@@ -7,7 +7,7 @@ const LandingPage = () => {
         <div
           className="hero min-h-screen"
           style={{
-            backgroundImage: "url('/wally.png')",
+            backgroundImage: "url('/exabg.jpg')",
           }}
         >
           <div className=""></div>
