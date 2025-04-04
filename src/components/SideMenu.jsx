@@ -13,11 +13,12 @@ const SideMenu = () => {
     }
   return (
     <>
-      <div className="flex h-screen flex-col justify-between border-e border-gray-100 bg-white">
+      <div className="sticky top-0 h-screen w-64 flex flex-col justify-between border-e border-gray-100 bg-gray-300 shadow-sm">
         <div className="px-4 py-6">
-          <span className="grid h-10 w-32 place-content-center ml-6 rounded-lg text-xs text-gray-600">
-           <strong>ADMIN DASHBOARD</strong>
-          </span>
+        <img
+              src="/Logo.png"
+              className="h-40 ml-7 w-auto"
+            />
 
           <ul className="mt-6 space-y-1">
             <li>
@@ -218,10 +219,10 @@ const SideMenu = () => {
           </ul>
         </div>
 
-        <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
+        <div className="sticky inset-x-0 bottom-0 border-t border-gray-">
           <a
             
-            className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50"
+            className="flex items-center gap-2 bg-gray-500 p-4 hover:bg-gray-50"
           >
             <img
               alt=""

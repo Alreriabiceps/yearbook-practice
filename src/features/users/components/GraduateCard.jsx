@@ -9,7 +9,7 @@ const GraduateCard = ({ student, className }) => { // Added className propagatio
       courseMajor: 'N/A',
       personalQuote: '...',
       careerAspirations: '...',
-      profileImageUrl: '/profile.jpg' // Default profile image
+      profileImageUrl: '/33.jpg' // Default profile image
   };
 
   const {
@@ -34,12 +34,12 @@ const GraduateCard = ({ student, className }) => { // Added className propagatio
       <figure className="w-full h-40 flex-shrink-0 bg-gray-100"> {/* Reduced image height, added bg */}
         <img
           // Use student's specific image URL if available, otherwise fallback
-          src={profileImageUrl || '/profile.jpg'}
+          src={profileImageUrl || '/senku.jpg'}
           alt={`Portrait of ${fullName}`}
           // Ensures image covers the area without distortion, centers it
           className="h-full w-full object-cover object-center"
           // Basic error handling for broken image links
-          onError={(e) => { e.target.onerror = null; e.target.src = '/profile.jpg'; }}
+          onError={(e) => { e.target.onerror = null; e.target.src = '/senku.jpg'; }}
         />
       </figure>
 
