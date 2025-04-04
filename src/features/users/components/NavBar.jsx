@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router'; // Use 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router'; // Added Link
 
-// Renamed component
 const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,28 +17,13 @@ const NavBar = () => {
   // --- Update active main section based on current route ---
   useEffect(() => {
     const path = location.pathname;
-    // Map top-level paths directly
-    const sectionMap = {
-        '/landingpage': 'landingpage',
-        '/yearbook': 'yearbook', // Only active for the main yearbook page
-        '/information-system': 'information-system', // Track specific course pages if needed for highlighting elsewhere
-        '/tourism-management': 'tourism-management',
-        '/criminology': 'criminology',
-        '/marine-engineering': 'marine-engineering',
-    };
-    // Determine which *main* link should be highlighted
     if (path === '/landingpage') {
       setActiveSection('landingpage');
-    } else if (path === '/yearbook') {
-       // Only highlight Yearbook for the main selection page
+    } else if (path === '/yearbook' || path.startsWith('/yearbook/')) {
+       // Highlight main "Yearbook" if on home or any subpage
       setActiveSection('yearbook');
-    } else if (Object.keys(sectionMap).includes(path)) {
-        // If it's one of the course pages, maybe don't highlight any main link,
-        // or decide if they should fall under 'yearbook' highlight - let's not for now.
-        setActiveSection(''); // Or potentially setActiveSection('yearbook') if desired UX
-    }
-     else {
-      setActiveSection(''); // Reset for other routes
+    } else {
+      setActiveSection(''); // Reset for other routes if any
     }
   }, [location.pathname]);
 
@@ -60,10 +44,9 @@ const NavBar = () => {
     };
   }, [isYearbookDropdownOpen]);
 
-  // Helper to check active course page for dropdown styling
-  const isCoursePageActive = (coursePath) => {
-      // Direct comparison with the top-level path
-      return location.pathname === coursePath;
+  // Helper to check active sub-page for dropdown styling
+  const isYearbookSubpageActive = (subpath) => {
+      return location.pathname === `/yearbook${subpath}`;
   }
 
   return (
@@ -74,8 +57,8 @@ const NavBar = () => {
         {/* Logo */}
         <Link to="/landingpage" className="btn btn-ghost text-xl px-2"> {/* Adjusted padding */}
           {/* Replace with your actual Logo component or img tag */}
-          <span className="grid h-10 w-auto px-3 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
-            Logo
+          <span className="grid h-10 w-auto px-3 place-content-center rounded-lg text-xs text-gray-600">
+            <img src="/Logo.png" alt="Logo" className="h-13 w-auto" /> {/* Adjusted size */}
           </span>
         </Link>
 
@@ -84,7 +67,6 @@ const NavBar = () => {
           <li>
              <button
                 onClick={() => handleNavigate('/landingpage')}
-                // Highlight only if exactly on landing page
                 className={`text-sm font-medium rounded-lg ${
                    activeSection === 'landingpage' ? 'bg-base-200 text-base-content' : ''
                 }`}
@@ -96,7 +78,6 @@ const NavBar = () => {
           <li ref={yearbookDropdownRef}> {/* Attach ref to the list item for outside click */}
             <details onToggle={(e) => setIsYearbookDropdownOpen(e.currentTarget.open)} open={isYearbookDropdownOpen}>
               <summary
-                 // Highlight only if exactly on /yearbook page
                  className={`text-sm font-medium rounded-lg ${
                     activeSection === 'yearbook' ? 'bg-base-200 text-base-content' : ''
                  }`}
@@ -107,7 +88,6 @@ const NavBar = () => {
                  <li>
                     <button
                        onClick={() => handleNavigate('/yearbook')}
-                       // Highlight only if exactly on /yearbook page
                        className={`text-sm ${location.pathname === '/yearbook' ? 'font-semibold' : ''}`}
                     >
                        Yearbook Home
@@ -115,36 +95,32 @@ const NavBar = () => {
                  </li>
                  <li>
                     <button
-                       onClick={() => handleNavigate('/information-system')} // Updated Path
-                       // Highlight if on /information-system page
-                       className={`text-sm ${isCoursePageActive('/information-system') ? 'font-semibold' : ''}`}
+                       onClick={() => handleNavigate('/information-system')}
+                       className={`text-sm ${isYearbookSubpageActive('/information-system') ? 'font-semibold' : ''}`}
                     >
                        BS Information Systems
                     </button>
                  </li>
                  <li>
                     <button
-                       onClick={() => handleNavigate('/tourism-management')} // Updated Path
-                       // Highlight if on /tourism-management page
-                       className={`text-sm ${isCoursePageActive('/tourism-management') ? 'font-semibold' : ''}`}
+                       onClick={() => handleNavigate('/tourism-management')}
+                       className={`text-sm ${isYearbookSubpageActive('/tourism-management') ? 'font-semibold' : ''}`}
                     >
                        BS Tourism Management
                     </button>
                  </li>
                  <li>
                     <button
-                       onClick={() => handleNavigate('/criminology')} // Updated Path
-                       // Highlight if on /criminology page
-                       className={`text-sm ${isCoursePageActive('/criminology') ? 'font-semibold' : ''}`}
+                       onClick={() => handleNavigate('/criminology')}
+                       className={`text-sm ${isYearbookSubpageActive('/criminology') ? 'font-semibold' : ''}`}
                     >
                        BS Criminology
                     </button>
                  </li>
                  <li>
                     <button
-                       onClick={() => handleNavigate('/marine-engineering')} // Updated Path
-                       // Highlight if on /marine-engineering page
-                       className={`text-sm ${isCoursePageActive('/marine-engineering') ? 'font-semibold' : ''}`}
+                       onClick={() => handleNavigate('/marine-engineering')}
+                       className={`text-sm ${isYearbookSubpageActive('/marine-engineering') ? 'font-semibold' : ''}`}
                     >
                        BS Marine Engineering
                     </button>
@@ -173,11 +149,10 @@ const NavBar = () => {
                      <summary>Yearbook</summary>
                      <ul className="p-2 bg-base-100 rounded-t-none">
                         <li><button onClick={() => handleNavigate('/yearbook')}>Yearbook Home</button></li>
-                        {/* Updated Mobile Paths */}
-                        <li><button onClick={() => handleNavigate('/information-system')}>BS Info Systems</button></li>
-                        <li><button onClick={() => handleNavigate('/tourism-management')}>BS Tourism</button></li>
-                        <li><button onClick={() => handleNavigate('/criminology')}>BS Criminology</button></li>
-                        <li><button onClick={() => handleNavigate('/marine-engineering')}>BS Marine Eng.</button></li>
+                        <li><button onClick={() => handleNavigate('/yearbook/information-systems')}>BS Info Systems</button></li>
+                        <li><button onClick={() => handleNavigate('/yearbook/tourism-management')}>BS Tourism</button></li>
+                        <li><button onClick={() => handleNavigate('/yearbook/criminology')}>BS Criminology</button></li>
+                        <li><button onClick={() => handleNavigate('/yearbook/marine-engineering')}>BS Marine Eng.</button></li>
                      </ul>
                   </details>
                </li>
