@@ -11,7 +11,7 @@ const LandingPage = () => {
           }}
         >
           <div className=""></div>
-          <img className="w-32 h-32 mb-90" src="Logo.png" alt="Logo" />
+          <img className="w-50 h-50 mb-110" src="Logo.png" alt="Logo" />
           <div className="hero-content text-neutral-content text-center">
             <div className="max-w-md">
               <h1 className="mb-5 text-5xl font-bold">Hello there Graduates</h1>
